@@ -8,6 +8,8 @@ SRC_URI:append:qcom = " \
 "
 
 do_install:append:qcom() {
+    sed -i -e "/^\[core\]/a require-outputs=none" ${D}${sysconfdir}/xdg/weston/weston.ini
+
     install -d ${D}${systemd_system_unitdir}/weston.service.d
     install -m 0644 ${UNPACKDIR}/additional-devices.conf \
         ${D}${systemd_system_unitdir}/weston.service.d/additional-devices.conf
